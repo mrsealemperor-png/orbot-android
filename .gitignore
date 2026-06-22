@@ -41,3 +41,6 @@ app/src/main/assets/LICENSE
 
 # build_shadowsocks.sh script log:
 build_shadowsocks.log
+
+# for messing with fastlane screengrab locally
+screenshot_sandbox*/

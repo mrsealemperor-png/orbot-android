@@ -13,8 +13,45 @@
 ALL_LOCALES_WE_TRACK = ['en-US', 'fr-FR', 'es-MX', 'de-DE', 'ar', 'he', 'tr', 'pt', 'ja-JP', 'hi', 'ru', 'ko-KR', 'bg', 'en_GB', 'id', 'ga', 'it-IT', 'uk', 'ca', 'ro', 'ta', 'pl', 'pt_PT', 'fr', 'es', 'sq', 'de', 'vi', 'pt_BR', 'cs', 'et', 'fi', 'el', 'sr', 'nb_NO', 'az', 'sv', 'sk', 'lv', 'es_CU', 'tk', 'sl', 'zh_Hans'].sort
 
 # locales featured on https://orbot.app
-WEBSITE_LOCALES = ['en-US', 'fr-FR', 'es', 'ja', 'ar', 'bo', 'de-DE', 'pt', 'ru', 'zh_Hans'].sort
-
+WEBSITE_LOCALES = [
+	'ar',
+	'ay',
+	'be',
+	'bg',
+	'ca',
+	'cs',
+	'de',
+	'el',
+	'eo',
+	'en_US',
+	'es',
+	'es_CU',
+	'fa',
+	'fi',
+	'fr',
+	'ga',
+	'he',
+	'ia',
+	'id',
+	'it',
+	'ja',
+	'ko',
+	'lv',
+	'nl',
+	'pl',
+	'pt_BR',
+	'ro',
+	'ru',
+	'sq',
+	'sr',
+	'ta',
+	'tk',
+	'tr',
+	'uk',
+	'vi',
+	'zh_Hans',
+	'zh_Hant'
+]
 # get screenshots for all locales, excluding the ones in this array
 # useful if some screenshots aren't coming out good for some locales, and others are.
 # just exclude the good locales and rerun fastlane screengrab
@@ -22,7 +59,7 @@ BUT_SKIP_THESE_ONES = [] # dont skip any, default...
 # BUT_SKIP_THESE_ONES = ['en-US', 'fr-FR', 'hi', 'pt'] # skip some
 
 # generate screenshots for locales only on https://orbot.app
-# ALL_LOCALES_WE_TRACK = WEBSITE_LOCALES
+ALL_LOCALES_WE_TRACK = WEBSITE_LOCALES
 
 ALL_LOCALES_WE_TRACK -= BUT_SKIP_THESE_ONES
 locales(ALL_LOCALES_WE_TRACK) # default run everything, except the ones we're passing on
@@ -38,23 +75,29 @@ KINDNESS_SCREEN = PREFIX + 'KindnessModeFragment'
 MORE_SCREEN = PREFIX + 'MoreFragment'
 SETTINGS = PREFIX + 'Settings'
 
-# uncomment ONE of these to only run certain test(s), otherwise Screengrab will run every test defiend
-# in the package org.torproject.android, even if there's no variable defined for it above... 
-# Keep these all commented out during commits...
-	
-# CHOOSE_APPS makes a toast, that sometimes sneaks its way into other screenshots, run it in isolation
-# also for whatever reason, CHOOSE_APPS only works if another test runs before it... IDK right now. 
-# use_tests_in_classes([CHOOSE_HOW_TO_CONNECT, CHOOSE_APPS])
+SANDBOX_ONE_TEST = SETTINGS 
 
-# explicitly run every test..., with CHOOSE_APPS last
-use_tests_in_classes([CHOOSE_HOW_TO_CONNECT, CONNECTED_SCREEN, KINDNESS_SCREEN, MORE_SCREEN, SETTINGS, CHOOSE_APPS])
+
+# if SANDBOX_ONE_TEST isn't nil, run a single test and output it into a gitignore'd dir
+if (SANDBOX_ONE_TEST != nil) 
+	output_directory('screenshot_sandbox_' + SANDBOX_ONE_TEST)
+	use_tests_in_classes(SANDBOX_ONE_TEST)
+else 
+
+	# explicitly run every test..., with CHOOSE_APPS last
+	# CHOOSE_APPS makes a toast, that sometimes sneaks its way into other screenshots, run it in isolation
+	# also for whatever reason, CHOOSE_APPS only works if another test runs before it... IDK right now. 
+	# use_tests_in_classes([CHOOSE_HOW_TO_CONNECT, CHOOSE_APPS])
+
+	use_tests_in_classes([CHOOSE_HOW_TO_CONNECT, CONNECTED_SCREEN, KINDNESS_SCREEN, MORE_SCREEN, SETTINGS, CHOOSE_APPS])
+end
+
+
 
 # clear all previously generated screenshots in your local output directory before creating new ones
 # if you're running multiple rounds of fastlane screengrab, and especially if use_timestamp_suffix.
 # if true, this deletes ALL screenshots in the repository, even if you are only redoing a specific one.
-#
-# IF YOU ARE REDOING ANY SCREENSHOTS YOU WANT THIS TO BE TRUE. Then just git commit the new screenshot.
-clear_previous_screenshots(true)
+clear_previous_screenshots(false)
 
 
 
@@ -75,3 +118,4 @@ app_package_name('org.torproject.android.debug')
 
 skip_open_summary(true) 
 device_type('phone') # one: of phone, sevenInch, tenInch, tv, wear
+use_timestamp_suffix(false)

@@ -22,9 +22,13 @@ class ScreenshotChooseHowToConnect : BaseScreenshotTest() {
 
     @Before
     fun setup() {
+        Regionalization.countriesWithDnsttSupport
         when (Screengrab.getLocale()) {
-            "fa" -> Prefs.bridgeCountry = "IR"
-            "en-US" -> Prefs.bridgeCountry = "US"
+            "fa" -> Prefs.bridgeCountry = Regionalization.IRAN
+            "tr" -> Prefs.bridgeCountry = Regionalization.TURKEY
+            "ru" -> Prefs.bridgeCountry = Regionalization.RUSSIA
+            "zh_Hans", "zh_Hant" -> Prefs.bridgeCountry = Regionalization.CHINA
+            else -> Prefs.bridgeCountry = ""
         }
     }
 
