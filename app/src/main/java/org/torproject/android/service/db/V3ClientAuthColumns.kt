@@ -42,7 +42,11 @@ object V3ClientAuthColumns : BaseColumns {
                 val domainIndex = v3auths.getColumnIndex(DOMAIN)
                 val hashIndex = v3auths.getColumnIndex(HASH)
                 // Ensure that are have all the indexes before trying to use them
-                if (domainIndex < 0 || hashIndex < 0) continue
+                if (domainIndex < 0 || hashIndex < 0) {
+                    // TODO
+                    Log.wtf("V3", "domain=$domainIndex, hashIndex=$hashIndex")
+                    continue
+                }
                 val domain = v3auths.getString(domainIndex)
                 val hash = v3auths.getString(hashIndex)
                 val authFile = File(v3AuthBasePath, "${i++}.auth_private")
