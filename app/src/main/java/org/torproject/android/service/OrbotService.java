@@ -27,7 +27,6 @@ import net.freehaven.tor.control.TorControlConnection;
 import org.torproject.android.R;
 import org.torproject.android.service.circumvention.SmartConnect;
 import org.torproject.android.service.db.OnionServiceColumns;
-import org.torproject.android.service.db.V3ClientAuthColumns;
 import org.torproject.android.service.tor.CustomTorResourceInstaller;
 import org.torproject.android.service.tor.ShadowSocks;
 import org.torproject.android.util.*;
@@ -253,9 +252,6 @@ public class OrbotService extends VpnService {
 
                 if (!appCacheHome.exists()) appCacheHome.mkdirs();
 
-                mV3OnionBasePath = OnionServiceColumns.createV3OnionDir(this);
-                var mV3AuthBasePath = V3ClientAuthColumns.createV3AuthDir(this);
-
                 if (mNotificationManager == null)
                     mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -404,7 +400,7 @@ public class OrbotService extends VpnService {
     }
 
     private void updateV3OnionNames() {
-        OnionServiceColumns.updateV3OnionNames(this, mV3OnionBasePath);
+        OnionServiceColumns.updateV3OnionNames(this, OnionServiceColumns.createV3OnionDir(this));
         // This old status hack is temporary and fixes the issue reported by syphyr at
         // https://github.com/guardianproject/orbot/pull/556
         // Down the line a better approach needs to happen for sending back the onion names' updated
