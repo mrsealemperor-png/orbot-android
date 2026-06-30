@@ -4,7 +4,7 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
-import org.torproject.android.R
+import com.seal.tyulenvpn.R
 import org.torproject.android.service.vpn.VpnServicePrepareWrapper
 import org.torproject.android.util.areBatteryOptimizationsDisabled
 import org.torproject.android.util.openBatteryOptimizationAppListScreen
