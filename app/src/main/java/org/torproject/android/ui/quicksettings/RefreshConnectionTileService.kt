@@ -2,7 +2,7 @@ package org.torproject.android.ui.quicksettings
 
 import android.service.quicksettings.TileService
 import android.widget.Toast
-import org.torproject.android.R
+import com.seal.tyulenvpn.R
 import org.torproject.android.service.OrbotConstants
 import org.torproject.android.util.canStartForegroundServices
 import org.torproject.android.util.sendIntentToService
