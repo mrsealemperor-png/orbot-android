@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import org.torproject.android.R
+import com.seal.tyulenvpn.R
 import org.torproject.android.databinding.FragmentCamoBinding
 import org.torproject.android.util.getKey
 import org.torproject.android.util.Prefs
