@@ -10,7 +10,7 @@ import android.os.Build
 import android.provider.Settings
 import androidx.annotation.DeprecatedSinceApi
 import androidx.fragment.app.Fragment
-import org.torproject.android.R
+import com.seal.tyulenvpn.R
 import org.torproject.android.util.putNotSystem
 
 // some of this logic is adapted from Mullvad's amazing VpnServiceUtils.kt
