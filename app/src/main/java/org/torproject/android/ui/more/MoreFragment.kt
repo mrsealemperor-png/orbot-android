@@ -11,8 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import org.torproject.android.OrbotActivity
-import org.torproject.android.R
-import org.torproject.android.databinding.FragmentMoreBinding
+import com.seal.tyulenvpn.R
+import com.seal.tyulenvpn.databinding.FragmentMoreBinding
 import org.torproject.android.util.sendIntentToService
 import org.torproject.android.service.OrbotConstants
 import org.torproject.android.service.OrbotService
