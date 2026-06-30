@@ -19,7 +19,7 @@ import org.torproject.android.service.OrbotService
 import java.text.Normalizer
 import androidx.core.net.toUri
 import androidx.preference.ListPreference
-import org.torproject.android.R
+import com.seal.tyulenvpn.R
 
 /**
  * Extension function for `Intent` to add a flag that marks the intent as originating
