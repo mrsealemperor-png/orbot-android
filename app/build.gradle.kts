@@ -52,6 +52,7 @@ configure<ApplicationExtension> {
     buildFeatures {
         buildConfig = true
         viewBinding = true
+        dataBinding = true
     }
 
     testOptions { execution = "ANDROIDX_TEST_ORCHESTRATOR" }
@@ -76,9 +77,9 @@ configure<ApplicationExtension> {
         getByName("release") {
             isShrinkResources = false
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.txt"
-            )
+            file("proguard-android-optimize.txt").let {
+                proguardFiles(getDefaultProguardFile(it.name), "proguard-rules.txt")
+            }
             signingConfig = signingConfigs.getByName("release")
         }
         getByName("debug") {
@@ -100,7 +101,6 @@ configure<ApplicationExtension> {
         }
         create("nightly") {
             dimension = "free"
-            // overwrites defaults from defaultConfig
             applicationId = "com.seal.tyulenvpn.nightly"
             versionCode = (Date().time / 1000).toInt()
         }
@@ -108,7 +108,6 @@ configure<ApplicationExtension> {
 
     packaging {
         jniLibs {
-            // Needed for shadowsocks-rust client to be available to execute.
             useLegacyPackaging = true
         }
     }
@@ -122,7 +121,6 @@ configure<ApplicationExtension> {
         textReport = false
         xmlReport = false
     }
-
 }
 
 val updateBuiltinBridges = tasks.register<UpdateBridgeConfig>("updateBuiltinBridges") {
@@ -140,7 +138,6 @@ val updateBuiltinBridges = tasks.register<UpdateBridgeConfig>("updateBuiltinBrid
     gitStatusOutput.set(providers.exec {
         commandLine("git", "status", "--porcelain")
     }.standardOutput.asText.map { it.trim() }.orElse(""))
-
 }
 
 androidComponents {
@@ -156,7 +153,7 @@ androidComponents {
             }
         }
         base {
-            archivesName.set("TulenVPN-${android.defaultConfig.versionName}")
+            archivesName.set("TyulenVPN-${android.defaultConfig.versionName}")
         }
         if (variant.buildType == "release") {
             updateBuiltinBridges.configure {
@@ -189,18 +186,10 @@ dependencies {
     implementation(libs.quickie)
     implementation(libs.material3)
 
-    // IPtProxy (for Snowflake, obfs4, dnstt and all other pluggable transports)
     implementation(libs.iptproxy)
-    // uncomment to use a local build of IPtProxy:
-    // implementation(files("../../IPtProxy/IPtProxy.aar"))
-
-
-    // Tor
     implementation(files("../libs/geoip.jar"))
     api(libs.guardian.jtorctl)
     api(libs.tor.android)
-    // uncomment to use a local build of tor-android:
-    // api(files("../../tor-android/tor-android-binary/build/outputs/aar/tor-android-binary-debug.aar"))
 
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso)
