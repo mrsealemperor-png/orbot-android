@@ -25,6 +25,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.scottyab.rootbeer.RootBeer
+import com.seal.tyulenvpn.R
 import org.torproject.android.service.OrbotConstants
 import org.torproject.android.ui.connect.ConnectViewModel
 import org.torproject.android.ui.connect.RequestPostNotificationPermission
@@ -221,7 +222,7 @@ class OrbotActivity : BaseActivity() {
         /**
          * When OrbotService gets CMD_ACTIVE it:
          * 1. Checks if the control port is open & tor is connected:
-         *   1a. If true, sends tor the "ACTIVE" signal over the control port
+         * 1a. If true, sends tor the "ACTIVE" signal over the control port
          * 2. OrbotService replies back to OrbotActivity with its status, regardless of step 1
          */
         sendIntentToService(OrbotConstants.CMD_ACTIVE)
@@ -242,92 +243,4 @@ class OrbotActivity : BaseActivity() {
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_CODE_VPN && resultCode == RESULT_OK) {
-            connectViewModel.triggerStartTorAndVpn()
-        }
-    }
-
-    private val orbotServiceBroadcastReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context?, intent: Intent?) {
-            val status = intent?.getStringExtra(TorService.EXTRA_STATUS)
-            when (intent?.action) {
-                OrbotConstants.LOCAL_ACTION_STATUS -> {
-                    connectViewModel.updateState(this@OrbotActivity, status)
-                }
-
-                OrbotConstants.LOCAL_ACTION_LOG -> {
-                    intent.getStringExtra(OrbotConstants.LOCAL_EXTRA_BOOTSTRAP_PERCENT)?.let {
-                        connectViewModel.updateBootstrapPercent(it.toIntOrNull() ?: 0)
-                    }
-                    intent.getStringExtra(OrbotConstants.LOCAL_EXTRA_LOG)?.let {
-                        connectViewModel.updateLogState(it)
-                    }
-                }
-
-                OrbotConstants.LOCAL_ACTION_PORTS -> {
-                    val socks = intent.getIntExtra(OrbotConstants.EXTRA_SOCKS_PROXY_PORT, -1)
-                    val http = intent.getIntExtra(OrbotConstants.EXTRA_HTTP_PROXY_PORT, -1)
-                    if (http > 0 && socks > 0) {
-                        portSocks = socks
-                        portHttp = http
-                    }
-                }
-
-                else -> {}
-            }
-        }
-    }
-
-    private fun promptDeviceAuthenticationIfRequired() {
-        if (!Prefs.requireDeviceAuthentication)
-            return
-
-        if (!OrbotApp.shouldRequestAuthentication)
-            return
-
-        // if app was closed, we should re-request password upon
-        // re-open, even if we've gotten it already
-        OrbotApp.shouldRequestAuthentication = false
-
-        if (OrbotApp.isAuthenticationPromptOpenLegacyFlag)
-            return
-
-        OrbotApp.isAuthenticationPromptOpenLegacyFlag = true
-
-        rootLayout?.visibility = View.INVISIBLE
-        DeviceAuthenticationPrompt.openPrompt(this, object :
-            BiometricPrompt.AuthenticationCallback() {
-            override fun onAuthenticationError(errorCode: Int, errorMsg: CharSequence) {
-                OrbotApp.isAuthenticationPromptOpenLegacyFlag = false
-                if (errorCode == BiometricPrompt.ERROR_USER_CANCELED) {
-                    OrbotApp.resetLockFlags()
-                    finish() // user presses back, just close
-                } else if (errorCode == BiometricPrompt.ERROR_HW_UNAVAILABLE) {
-                    // we set this flag when Orbot *can't* authenticate, ie no password or unsupported device
-                    showToast(errorMsg) // String set in RequirePasswordPrompt.kt
-                    rootLayout?.visibility = View.VISIBLE
-                }
-            }
-
-            override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
-                OrbotApp.shouldRequestAuthentication = false
-                OrbotApp.isAuthenticationPromptOpenLegacyFlag = false
-                rootLayout?.visibility = View.VISIBLE
-            }
-
-            override fun onAuthenticationFailed() {
-                OrbotApp.resetLockFlags()
-                finish()
-            }
-        })
-    }
-
-    companion object {
-        private const val TAG = "OrbotActivity"
-        private const val KEY_TOR_STATUS = "key_tor_status"
-        const val REQUEST_CODE_VPN = 1234
-
-        // Make sure this is only shown once per app-start, not on every device rotation.
-        private var rootDetectionShown = false
-    }
-}
+        if (requestCode == REQUEST_CODE_VPN && resultCode == RESULT
