@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.seal.tyulenvpn"
     android:installLocation="internalOnly">
 
-    <!--
-        Some Chromebooks don't support touch. Although not essential,
-        it's a good idea to explicitly include this declaration.
-    -->
     <uses-feature
         android:name="android.hardware.touchscreen"
         android:required="false" />
@@ -25,13 +20,10 @@
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_REMOTE_MESSAGING" />
 
-
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 
-    <!-- For Android 13 -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
-    <!-- For Android 14 -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
 
     <queries>
@@ -40,11 +32,6 @@
         </intent>
     </queries>
 
-    <!--
-    usesCleartextTraffic is needed for SSDP multicast local router discovery (which is an unencrypted
-    HTTP-style protocol) and for UPnP IGD requests to map ports for Snowflake Proxy, (which are also
-    unencrypted HTTP-style requests).
-     -->
     <application
         android:name=".OrbotApp"
         android:allowBackup="false"
@@ -128,7 +115,6 @@
             android:enabled="true"
             android:stopWithTask="true" />
 
-
         <service
             android:name=".service.OrbotService"
             android:enabled="true"
@@ -170,7 +156,6 @@
             </intent-filter>
         </service>
 
-
         <activity-alias
             android:name="com.seal.tyulenvpn.main.NightWatch"
             android:enabled="false"
@@ -182,8 +167,8 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity-alias>
+
         <activity-alias
             android:name="com.seal.tyulenvpn.main.Assistant"
             android:enabled="false"
@@ -195,8 +180,8 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity-alias>
+
         <activity-alias
             android:name="com.seal.tyulenvpn.main.Paint"
             android:enabled="false"
@@ -208,8 +193,8 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity-alias>
+
         <activity-alias
             android:name="com.seal.tyulenvpn.main.Tetras"
             android:enabled="false"
@@ -221,8 +206,8 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity-alias>
+
         <activity-alias
             android:name="com.seal.tyulenvpn.main.ToDo"
             android:enabled="false"
@@ -234,8 +219,8 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity-alias>
+
         <activity-alias
             android:name="com.seal.tyulenvpn.main.FitGrit"
             android:enabled="false"
@@ -247,8 +232,8 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity-alias>
+
         <activity-alias
             android:name="com.seal.tyulenvpn.main.Birdie"
             android:enabled="false"
@@ -260,8 +245,8 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity-alias>
+
         <activity-alias
             android:name="com.seal.tyulenvpn.main.OrbotAlt1"
             android:enabled="false"
@@ -273,8 +258,8 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity-alias>
+
         <activity-alias
             android:name="com.seal.tyulenvpn.main.OrbotAlt2"
             android:enabled="false"
@@ -286,8 +271,8 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity-alias>
+
         <activity-alias
             android:name="com.seal.tyulenvpn.main.OrbotAlt3"
             android:enabled="false"
@@ -299,8 +284,8 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity-alias>
+
         <activity-alias
             android:name="com.seal.tyulenvpn.main.OrbotAlt4"
             android:enabled="false"
@@ -312,7 +297,7 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity-alias>
+
     </application>
 </manifest>
