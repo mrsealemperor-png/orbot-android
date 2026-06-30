@@ -10,7 +10,7 @@ import androidx.fragment.app.FragmentActivity
 
 import com.google.android.material.snackbar.Snackbar
 
-import org.torproject.android.R
+import com.seal.tyulenvpn.R
 import androidx.core.net.toUri
 
 object PermissionManager {
