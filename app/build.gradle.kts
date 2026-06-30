@@ -19,13 +19,13 @@ fun getVersionName(): Provider<String> {
 }
 
 configure<ApplicationExtension> {
-    namespace = "org.torproject.android"
+    namespace = "com.seal.tyulenvpn"
     compileSdk {
         version = release(37)
     }
 
     defaultConfig {
-        applicationId = namespace
+        applicationId = "com.seal.tyulenvpn"
         versionCode = orbotBaseVersionCode
         versionName = getVersionName().get()
         minSdk = 24
@@ -101,7 +101,7 @@ configure<ApplicationExtension> {
         create("nightly") {
             dimension = "free"
             // overwrites defaults from defaultConfig
-            applicationId = "org.torproject.android.nightly"
+            applicationId = "com.seal.tyulenvpn.nightly"
             versionCode = (Date().time / 1000).toInt()
         }
     }
@@ -156,7 +156,7 @@ androidComponents {
             }
         }
         base {
-            archivesName.set("Orbot-${android.defaultConfig.versionName}")
+            archivesName.set("TulenVPN-${android.defaultConfig.versionName}")
         }
         if (variant.buildType == "release") {
             updateBuiltinBridges.configure {
