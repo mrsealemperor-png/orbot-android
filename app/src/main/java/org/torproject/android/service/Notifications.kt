@@ -7,7 +7,7 @@ import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
-import org.torproject.android.R
+import com.seal.tyulenvpn.R
 import org.torproject.android.util.Prefs
 import org.torproject.jni.TorService
 
