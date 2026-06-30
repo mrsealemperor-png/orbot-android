@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Тюлень VPN</string>
+    <string name="app_name">Тюлень VPN 🦭</string>
     <string name="app_description">Тюлень VPN - это бесплатное приложение-прокси, которое позволяет другим приложениям более безопасно использовать интернет. Тюлень VPN использует Tor для шифрования вашего интернет-трафика и скрывает его, перенаправляя через несколько компьютеров по всему миру.</string>
     <string name="menu_settings">Настройки Тюленя VPN</string>
     <string name="system_vpn_settings">Настройки VPN Android</string>
