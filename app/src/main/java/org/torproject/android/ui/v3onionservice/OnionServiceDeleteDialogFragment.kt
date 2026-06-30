@@ -9,7 +9,7 @@ import android.provider.BaseColumns
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 
-import org.torproject.android.R
+import com.seal.tyulenvpn.R
 import org.torproject.android.util.DiskUtils.recursivelyDeleteDirectory
 import org.torproject.android.service.OrbotConstants
 
