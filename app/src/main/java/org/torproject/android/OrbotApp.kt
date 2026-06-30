@@ -6,6 +6,8 @@ import android.util.Log
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
+import com.seal.tyulenvpn.BuildConfig
+import com.seal.tyulenvpn.R
 import org.torproject.android.localization.Languages
 import org.torproject.android.localization.LocaleHelper
 import org.torproject.android.service.circumvention.Transport.Companion.stateLocation
