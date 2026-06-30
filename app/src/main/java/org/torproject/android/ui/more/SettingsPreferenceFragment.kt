@@ -14,7 +14,7 @@ import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.Preference.OnPreferenceChangeListener
 import org.torproject.android.OrbotApp
-import org.torproject.android.R
+import com.seal.tyulenvpn.R
 import org.torproject.android.localization.Languages
 import org.torproject.android.service.OrbotConstants
 import org.torproject.android.service.tor.ShadowSocks
