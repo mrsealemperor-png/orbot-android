@@ -8,6 +8,7 @@ import org.torproject.android.service.db.V3ClientAuthColumns
 import org.torproject.android.util.NetworkUtils
 import org.torproject.android.util.Prefs
 import java.io.File
+import android.util.Log
 
 object TorConfig {
 
@@ -18,8 +19,10 @@ object TorConfig {
             "AvoidDiskWrites 1"
         )
 
-        val socksPortPref = getPort(Prefs.proxySocksPort ?: OrbotConstants.SOCKS_PROXY_PORT_DEFAULT)
-        val httpPortPref = getPort(Prefs.proxyHttpPort ?: OrbotConstants.HTTP_PROXY_PORT_DEFAULT)
+        val socksPortPref = getPort(Prefs.proxySocksPort)
+        Log.wtf("bim", "socksPref=$socksPortPref")
+        val httpPortPref = getPort(Prefs.proxyHttpPort)
+        Log.wtf("bim", "httpPref=$httpPortPref")
 
         val isolate = getIsolation()
         val ipv6Pref = getIpv6()
@@ -49,11 +52,8 @@ object TorConfig {
             conf.add("ReducedCircuitPadding 1")
         }
 
-        val transPort = Prefs.torTransPort ?: OrbotConstants.TOR_TRANSPROXY_PORT_DEFAULT.toString()
-        val dnsPort = Prefs.torDnsPort ?: OrbotConstants.TOR_DNS_PORT_DEFAULT.toString()
-
-        conf.add("TransPort ${NetworkUtils.checkPortOrAuto(transPort)} $isolate")
-        conf.add("DNSPort ${NetworkUtils.checkPortOrAuto(dnsPort)} $isolate")
+        conf.add("TransPort ${Prefs.torTransPort} $isolate")
+        conf.add("DNSPort ${Prefs.torDnsPort} $isolate")
         conf.add("VirtualAddrNetwork 10.192.0.0/10")
         conf.add("AutomapHostsOnResolve 1")
         conf.add("DormantClientTimeout 10 minutes")
