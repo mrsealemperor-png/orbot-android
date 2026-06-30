@@ -33,7 +33,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.torproject.android.BuildConfig
-import org.torproject.android.R
+import com.seal.tyulenvpn.R
 import org.torproject.android.databinding.FragmentAppManagerBinding
 import org.torproject.android.service.OrbotConstants
 import org.torproject.android.service.vpn.TorifiedApp
