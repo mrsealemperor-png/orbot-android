@@ -5,7 +5,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.preference.CheckBoxPreference
 import androidx.preference.Preference
 import androidx.preference.Preference.OnPreferenceChangeListener
-import org.torproject.android.R
+import com.seal.tyulenvpn.R
 import org.torproject.android.ui.core.BaseActivity
 import org.torproject.android.util.Prefs
 
