@@ -14,7 +14,7 @@ import androidx.core.database.getLongOrNull
 import androidx.core.database.getStringOrNull
 import androidx.core.net.toUri
 import androidx.preference.PreferenceManager
-import org.torproject.android.BuildConfig
+import com.seal.tyulenvpn.BuildConfig
 
 class PreferenceProvider: ContentProvider() {
 
