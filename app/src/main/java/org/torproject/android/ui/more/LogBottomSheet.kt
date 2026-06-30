@@ -10,8 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.preference.PreferenceManager
-import org.torproject.android.R
-import org.torproject.android.databinding.LogBottomSheetBinding
+import com.seal.tyulenvpn.R
+import com.seal.tyulenvpn.databinding.LogBottomSheetBinding
 import org.torproject.android.util.showToast
 import org.torproject.android.ui.OrbotBottomSheetDialogFragment
 import org.torproject.android.util.Prefs
